@@ -44,12 +44,17 @@
     <script>
         $(document).ready(function() {
             setTimeout(function() {
-                $("#flipbook").turn({
-                    width: 600,
-                    height: 800,
-                    autoCenter: true,
-                    display: 'double' // Ensures it flips like a real book
-                });
+                if ($("#flipbook").turn) { // Check if Turn.js is loaded
+                    $("#flipbook").turn({
+                        width: 600,
+                        height: 800,
+                        autoCenter: true,
+                        display: "double", // Makes pages turn like a real book
+                        acceleration: true
+                    });
+                } else {
+                    console.error("Turn.js did not load properly.");
+                }
             }, 500);
         });
     </script>
