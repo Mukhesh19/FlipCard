@@ -18,6 +18,7 @@
         #flipbook {
             width: 600px;
             height: 800px;
+            border: 2px solid red; /* Debugging */
         }
         #flipbook img {
             width: 100%;
@@ -33,16 +34,18 @@
         <img src="3.png" alt="Page 3">
         <img src="4.png" alt="Page 4">
         <img src="5.png" alt="Page 5">
-        <img src="6.png" alt="Page 5">
+        <img src="6.png" alt="Page 6">
     </div>
 
     <script>
         $(document).ready(function() {
-            $("#flipbook").turn({
-                width: 600,
-                height: 800,
-                autoCenter: true
-            });
+            setTimeout(function() {
+                $("#flipbook").turn({
+                    width: 600,
+                    height: 800,
+                    autoCenter: true
+                });
+            }, 500);
         });
     </script>
 
