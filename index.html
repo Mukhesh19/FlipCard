@@ -3,42 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Wedding</title>
+    <title>Indian Wedding</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #fffaf0;
+            background-color: #fff8e7;
             margin: 0;
             padding: 0;
         }
         header {
-            background-color: #ff6f61;
+            background-color: #a52a2a;
             color: white;
             padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .countdown, .details, .rsvp, .gallery {
-            padding: 20px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #ff6f61;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .image-grid {
+        nav {
+            background-color: #800000;
+            padding: 10px;
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 20px;
         }
-        .image-grid img {
-            width: 200px;
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #a52a2a;
+        }
+        .slideshow {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 300%;
+        }
+        .slides img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .wedding-details, .reception-details {
+            display: inline-block;
+            width: 45%;
+            vertical-align: top;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
         footer {
-            background-color: #ff6f61;
+            background-color: #800000;
             color: white;
             padding: 10px;
             margin-top: 20px;
@@ -48,57 +73,61 @@
 <body>
     <header>
         <h1>John & Jane's Wedding</h1>
-        <p>Join us on our special day!</p>
+        <p>Celebrate Love & Traditions</p>
     </header>
-    
-    <section class="countdown">
-        <h2>Countdown to Our Wedding</h2>
-        <div id="timer">Loading...</div>
+
+    <nav>
+        <a href="#slideshow">Gallery</a>
+        <a href="#wedding">Wedding</a>
+        <a href="#reception">Reception</a>
+        <a href="#rsvp">RSVP</a>
+    </nav>
+
+    <section id="slideshow" class="slideshow">
+        <div class="slides">
+            <img src="images/slide1.jpg" alt="Traditional Ceremony">
+            <img src="images/slide2.jpg" alt="Couple">
+            <img src="images/slide3.jpg" alt="Celebration">
+        </div>
     </section>
-    
-    <section class="details">
-        <h2>Wedding Details</h2>
+
+    <section id="wedding" class="wedding-details">
+        <h2>Wedding Ceremony</h2>
         <p><strong>Date:</strong> June 15, 2025</p>
-        <p><strong>Time:</strong> 4:00 PM</p>
+        <p><strong>Time:</strong> 10:00 AM</p>
+        <p><strong>Venue:</strong> Royal Palace Grounds</p>
+        <p><strong>Dress Code:</strong> Traditional Attire</p>
+    </section>
+
+    <section id="reception" class="reception-details">
+        <h2>Reception</h2>
+        <p><strong>Date:</strong> June 15, 2025</p>
+        <p><strong>Time:</strong> 7:00 PM</p>
         <p><strong>Venue:</strong> Grand Ballroom, Sunset Hotel</p>
         <p><strong>Dress Code:</strong> Formal Attire</p>
     </section>
-    
-    <section class="rsvp">
+
+    <section id="rsvp" class="rsvp">
         <h2>RSVP</h2>
-        <p>Please confirm your attendance by filling out the form below:</p>
+        <p>Please confirm your attendance:</p>
         <a href="https://forms.gle/yourgoogleformlink" target="_blank" class="btn">RSVP Now</a>
     </section>
-    
-    <section class="gallery">
-        <h2>Our Journey</h2>
-        <div class="image-grid">
-            <img src="1.png" alt="Our Journey">
-            <img src="2.png" alt="Engagement">
-            <img src="3.png" alt="Love Story">
-        </div>
-    </section>
-    
+
     <footer>
         <p>We can't wait to celebrate with you! ❤️</p>
     </footer>
-    
+
     <script>
-        function countdown() {
-            const weddingDate = new Date("June 15, 2025 16:00:00").getTime();
-            setInterval(function() {
-                const now = new Date().getTime();
-                const timeLeft = weddingDate - now;
-                
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                
-                document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            }, 1000);
+        let index = 0;
+        const slides = document.querySelector('.slides');
+        const totalSlides = slides.children.length;
+
+        function showNextSlide() {
+            index = (index + 1) % totalSlides;
+            slides.style.transform = `translateX(-${index * 100}%)`;
         }
-        countdown();
+
+        setInterval(showNextSlide, 3000);
     </script>
 </body>
 </html>
