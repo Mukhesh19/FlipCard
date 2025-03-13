@@ -17,7 +17,7 @@
         header {
             background-color: #a52a2a;
             color: white;
-            padding: 20px;
+            padding: 14px;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -52,10 +52,28 @@
             width: 400%;
         }
         .slides img, .slides video {
-            width: 1920px;
-            height: 1080px;
+            width: 1280px;
+            height: 720px;
             object-fit: cover;
             border-radius: 10px;
+        }
+        .indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+        .indicator {
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+        .active {
+            opacity: 1;
         }
         .wedding-details, .reception-details {
             display: inline-block;
@@ -71,24 +89,8 @@
         footer {
             background-color: #800000;
             color: white;
-            padding: 10px;
+            padding: 15px;
             margin-top: 20px;
-        }
-        @keyframes sparkle {
-            0% { background-position: 0 0; }
-            100% { background-position: 100% 100%; }
-        }
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('images/sparkle.gif') repeat;
-            opacity: 0.3;
-            z-index: -1;
-            animation: sparkle 10s linear infinite;
         }
     </style>
 </head>
@@ -107,13 +109,19 @@
 
     <section id="slideshow" class="slideshow">
         <div class="slides">
-            <video autoplay muted width="1920" height="1080">
+            <video autoplay muted>
                 <source src="To Our wedding page.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>  
             <img src="images/slide1.jpg" alt="Traditional Ceremony">
             <img src="images/slide2.jpg" alt="Couple">
             <img src="images/slide3.jpg" alt="Celebration">
+        </div>
+        <div class="indicators">
+            <span class="indicator active"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
         </div>
     </section>
 
@@ -133,21 +141,25 @@
         <p><strong>Dress Code:</strong> Formal Attire</p>
     </section>
 
+    <footer>
+        <p>We can't wait to celebrate with you! ❤️</p>
+    </footer>
+
     <script>
         let index = 0;
         const slides = document.querySelector('.slides');
         const slideElements = slides.children;
-        const slideIntervals = [5000, 4000, 4000, 4000]; // First slide 5s, others 4s
+        const indicators = document.querySelectorAll('.indicator');
+        const slideIntervals = [8000, 4000, 4000, 4000]; // Video 8s, others 4s
 
         function showNextSlide() {
             index = (index + 1) % slideElements.length;
             slides.style.transform = `translateX(-${index * 100}%)`;
+            indicators.forEach((dot, i) => dot.classList.toggle('active', i === index));
             setTimeout(showNextSlide, slideIntervals[index]);
         }
 
         setTimeout(showNextSlide, slideIntervals[0]);
     </script>
-          <p>We can't wait to celebrate with you! ❤️</p>
 </body>
-  
 </html>
